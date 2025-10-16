@@ -9,8 +9,9 @@ body{
     height: 100svh;
 }
 header{
-    width: 100%;
+    width: 50%;
     padding: 20px;
+    justify-self: center;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -18,8 +19,14 @@ header{
     ;
 
 }
-
-
+#movie-form{
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: black;
+}
+h2{
+    font-size: 1.1rem;
+}
 .star-box{
     display: flex;
     flex-direction: column;
