@@ -7,26 +7,73 @@
 body{
     width: 100svw;
     height: 100svh;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 24px;
 }
 header{
-    width: 50%;
+    min-width: 100%;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-self: center;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: rgb(137, 131, 141);
-    ;
+
 
 }
-#movie-form{
-    border-style: solid;
-    border-width: 0.1rem;
-    border-color: black;
-}
 h2{
-    font-size: 1.1rem;
+    text-align: start;
+    font-size: 2rem;
+    font-weight: 600;
+
 }
+
+#movie-form{
+    width: 80%;
+
+}
+
+.movie-table{
+width: 100%;
+}
+
+
+.submit{
+font-size: 24px;
+width: 50%;
+border-radius: 8px;
+}
+
+label{
+display: block;
+margin-bottom: .1rem;
+text-align: start;
+
+}
+
+.input-text{
+    font-size: 22px;
+    width: 100%;
+    height: 3rem;
+    border: 3px solid black;
+    border-radius: 8px;
+}
+
+.success, .error{
+    color:white;
+    padding: 5px;
+    margin: 5px 0 15px 0;
+}
+.success{
+    background-color: green;
+}
+.error{
+    background-color: red;
+}
+
 .star-box{
     display: flex;
     flex-direction: column;
@@ -42,3 +89,25 @@ h2{
 .stars i.active{
 color:#ff9c1a;
 }
+
+/* mobile large 425px */
+/* @media screen and (min-width: 425px) {
+
+}
+
+/* mobile large 768px */
+/* @media screen and (min-width: 768px) { 
+}
+
+
+/* laptpop 1080px */
+ @media screen and (min-width: 1080px) {
+header{
+min-width: 50%;
+}
+} 
+
+/* desktop 1440px
+@media screen and (min-width: 1440px) {
+
+}  */
