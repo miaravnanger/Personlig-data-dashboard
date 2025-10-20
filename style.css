@@ -10,13 +10,15 @@ body{
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 24px;
 }
-header{
+.container{
     min-width: 100%;
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-self: center;
+    justify-content: center;
+    align-items: center;
     border-radius: 8px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -102,8 +104,11 @@ color:#ff9c1a;
 
 /* laptpop 1080px */
  @media screen and (min-width: 1080px) {
-header{
+.container{
 min-width: 50%;
+display: flex;
+justify-content:center ;
+align-items: center;
 }
 } 
 
