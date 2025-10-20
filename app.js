@@ -1,12 +1,33 @@
 //Movie constructor
-function Movie(title, genre, year) {
+class Movie {
+  constructor(id, title, genre, year, rating = 0, favorite = false )
+  {
+  this.id = id;
   this.title = title;
   this.genre = genre;
   this.year = year;
+  this.rating = rating;
+  this.favorite = favorite;
 }
 
 // Ui Constructor
-function UI() {}
+  class UI {
+  addMovieToList(){
+
+}
+ showAlert(){
+
+}
+ deleteMovie(){
+
+}
+ editMovie(){
+
+}
+ clearFields(){
+
+}
+  }
 
 //legg Movie til listen
 UI.prototype.addMovieToList = function (movie) {
