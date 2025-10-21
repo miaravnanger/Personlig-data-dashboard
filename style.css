@@ -1,95 +1,135 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+:root {
+    --border: 3px solid black;
+    --border-radius: 8px;
+    --font-size-desktop: 25px;
+    --font-size-small: 16px;
+}
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-body{
-    width: 100svw;
-    height: 100svh;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 24px;
+body {
+  width: 100svw;
+  height: 100svh;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: var(--font-size-small);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.container{
-    min-width: 100%;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-self: center;
-    justify-content: center;
-    align-items: center;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgb(137, 131, 141);
-
-
+.container {
+  min-width: 100%;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgb(137, 131, 141);
 }
-h2{
-    text-align: start;
-    font-size: 2rem;
-    font-weight: 600;
-
+h2 {
+  text-align: start;
+  font-size: 18px;
+  font-weight: 700;
 }
-
-#movie-form{
-    width: 80%;
-
-}
-
-.movie-table{
-width: 100%;
-}
-
-
-.submit{
-font-size: 24px;
-width: 50%;
-border-radius: 8px;
-}
-
-label{
-display: block;
-margin-bottom: .1rem;
-text-align: start;
-
-}
-
-.input-text{
-    font-size: 22px;
+.list-container{
     width: 100%;
-    height: 3rem;
-    border: 3px solid black;
-    border-radius: 8px;
-}
-
-.success, .error{
-    color:white;
-    padding: 5px;
-    margin: 5px 0 15px 0;
-}
-.success{
-    background-color: green;
-}
-.error{
-    background-color: red;
-}
-
-.star-box{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-evenly;
 }
-.stars i{
-    color: #e6e6e6;
-    font-size: 16px;
-    cursor: pointer;
-    transition: color 0.2s ease;
+#movie-form {
+  width: 100%;
+  font-size: var(--font-size-small)
 }
-.stars i.active{
-color:#ff9c1a;
+
+.movie-table {
+  width: 100%;
+  font-size: var(--font-size-small);
+}
+.movie-table tr {
+  width: 100%;
+  font-size: var(--font-size-small);
+  justify-content: space-evenly;
+}
+
+.submit {
+  font-size: var(--font-size-small);
+  width: 50%;
+  border-radius: 8px;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.1rem;
+  text-align: start;
+}
+
+.input-text {
+  font-size: var(--font-size-small);
+  width: 100%;
+  height: 2rem;
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+/* filter og sorter */
+.filter-sort{
+    width: 100%;
+    font-size: 15px;
+    font-weight: 700;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    border: var(--border);
+    border-radius: var(--border-radius);
+}
+.success,
+.error {
+  color: white;
+  padding: 5px;
+  margin: 5px 0 15px 0;
+}
+.success {
+  background-color: green;
+}
+.error {
+  background-color: red;
+}
+/* gjør rediger knappen mindre */
+.fa-pencil{
+font-size: 10px;
+}
+.delete{
+    font-size: 12px;
+    font-weight: 700;
+}
+.star-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.stars i {
+  color: #e6e6e6;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.stars i.active {
+  color: #ff9c1a;
+  transform: scale(1.2);
+}
+/* UI stjernene*/
+.rating i {
+  color: #e6e6e6;
+  font-size: 9px;
+}
+.rating i.active {
+  color: #ff9c1a;
 }
 
 /* mobile large 425px */
@@ -103,14 +143,82 @@ color:#ff9c1a;
 
 
 /* laptpop 1080px */
- @media screen and (min-width: 1080px) {
-.container{
-min-width: 50%;
-display: flex;
-justify-content:center ;
-align-items: center;
+@media screen and (min-width: 1080px) {
+    body{
+        font-size: var(--font-size-desktop);
+    }
+    h2{
+        font-size: 30px;
+    }
+
+  .container {
+    min-width: 70%;
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-size-desktop);
+  }
+  .movie-table {
+    font-size:var(--font-size-desktop)
 }
-} 
+.submit{
+    font-size: var(--font-size-desktop)
+}
+#movie-form{
+    font-size: var(--font-size-desktop);
+}
+.movie-table {
+  width: 100%;
+  font-size: var(--font-size-desktop);
+}
+.movie-table tr {
+  width: 100%;
+  font-size: var(--font-size-desktop);
+  justify-content: space-evenly;
+}
+
+.submit {
+  font-size: var(--font-size-desktop);
+  width: 50%;
+  border-radius: 8px;
+}
+.submit {
+  font-size: var(--font-size-desktop);
+  width: 50%;
+  border-radius: 8px;
+}
+
+.input-text {
+  font-size: var(--font-size-desktop);
+  width: 100%;
+  height: 3.3rem;
+}
+/* UI stjernene*/
+.rating i {
+  color: #e6e6e6;
+  font-size: 15px;
+}
+.rating i.active {
+  color: #ff9c1a;
+}
+.fa-pencil{
+font-size: 17px;
+}
+.delete{
+    font-size: 20px;
+    font-weight: 700;
+}
+/* filter og sorter */
+.filter-sort{
+    width: 100%;
+    font-size: 20px;
+}
+.filter-sort input, select{
+    width: 100%;
+    font-size: 20px;
+}
+}
 
 /* desktop 1440px
 @media screen and (min-width: 1440px) {

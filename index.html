@@ -6,58 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Filmliste</title>
     <link rel="stylesheet" href="style.css" />
-		<script src="https://kit.fontawesome.com/e1db977daf.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/e1db977daf.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="container">
-      <h1>Movie-list</h1>
-<br>
+      <h1>Filmliste</h1>
+      <br />
       <form id="movie-form">
-        <h2>New movie:</h2>
-        <br>
+        <h2>Ny film</h2>
+        <br />
         <div>
-          <label for="title">Title</label>
+          <label for="title">Tittel</label>
           <input type="text" id="title" class="input-text" />
         </div>
-				<br>
+        <br />
         <div>
-          <label for="genre">Genre</label>
-          <input type="text" id="genre" class="input-text"/>
+          <label for="genre">Sjanger</label>
+          <input type="text" id="genre" class="input-text" />
         </div>
-        				<br>
+        <br />
         <div>
-          <label for="year">Year</label>
-          <input type="number" id="year" class="input-text"/>
+          <label for="year">Utgitt</label>
+          <input type="number" id="year" class="input-text" />
         </div>
-          <div class="star-box">
-          <title>Rating</title>
-					<div class="stars" id ="rating-stars">
-          <i class="fa-solid fa-star" data value="1"></i>
-          <i class="fa-solid fa-star" data value="3"></i>
-          <i class="fa-solid fa-star" data value="4"></i>
-          <i class="fa-solid fa-star" data value="5"></i>
-          <i class="fa-solid fa-star" data value="6"></i>
+        <div class="star-box">
+          <label>Rating</label>
+          <div class="stars" id="rating-stars">
+            <i class="fa-solid fa-star" data-value="1"></i>
+            <i class="fa-solid fa-star" data-value="2"></i>
+            <i class="fa-solid fa-star" data-value="3"></i>
+            <i class="fa-solid fa-star" data-value="4"></i>
+            <i class="fa-solid fa-star" data-value="5"></i>
+          </div>
         </div>
-				</div>
-          <br>
-          <div>
-            <label for="submit">Submit</label>
-          <input type="submit" id="submit" class="submit"/>
+        <br />
+        <div>
+          <input type="submit" id="submit" class="submit" />
         </div>
       </form>
-      <br>
-      <br>
+      <br />
+      <br />
+      <div class="filter-sort">
+        <div>
+          <label for="filter">Filter</label>
+          <input type="text" id="filter" placeholder="Søk etter filmer" />
+        </div>
+        <div>
+          <label for="sort">Sorter</label>
+          <select id="sort-by">
+            <option value="date-added">Sist lagt til</option>
+            <option value="rating">Rating (Høy-Lav)</option>
+            <option value="year">Utgitt (Nyeste først)</option>
+            <option value="title">Tittel (A/Å)</option>
+            <option value="genre">Sjanger (A/Å)</option>
+          </select>
+        </div>
+      </div>
+      <div class="list-container">
       <table class="movie-table">
         <thead>
           <tr>
-            <th>title</th>
-            <th>genre</th>
-            <th>year</th>
+            <th>Tittel</th>
+            <th>Sjanger</th>
+            <th>Utgitt</th>
+            <th>Rating</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody id="movie-list"></tbody>
       </table>
-</div>
+      </div>
+    </div>
   </body>
 </html>

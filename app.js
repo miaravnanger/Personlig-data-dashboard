@@ -21,45 +21,53 @@ class UI {
   }
   //legg til movie i listen
   static addMovieToList(movie) {
-  const list = document.querySelector("#movie-list");
-  const {id, title, genre, year, rating } = movie;
-      //lag tr element
-  const row = document.createElement("tr");
-  row.dataset.id = id;
+    const list = document.querySelector("#movie-list");
+    const { id, title, genre, year, rating } = movie;
+    //lag tr element
+    const row = document.createElement("tr");
+    row.dataset.id = id;
     //legg inn colonner
     row.innerHTML = `
   <td>${movie.title}</td>
   <td>${movie.genre}</td>
   <td>${movie.year}</td>
   <td class="rating">${UI.renderStars(rating)}</td>
-    <td><a href="#" class="delete">X<a/></td>
+  <td><a href="#" <i class="fa-solid fa-pencil"></i><td>
+  <td><a href="#" class="delete">X</a></td>
+
   `;
     list.appendChild(row);
+  
+
   }
-  static renderStars(rating){
-    let html ="";
-    for (let i = 1; i <= 5; i++){
-      html += `<i class="fa-solid fa-star ${i <= rating ? "active": ""}" data-value="${i}"></i>`;
+  static renderStars(rating) {
+    let html = "";
+    for (let i = 1; i <= 5; i++) {
+      html += `<i class="fa-solid fa-star ${
+        i <= rating ? "active" : ""
+      }" data-value="${i}"></i>`;
     }
     return html;
   }
   static deleteMovie(id) {
-    const movies = UI.getMovies().filter(m => m.id !== id);
+    const movies = UI.getMovies().filter((m) => m.id !== id);
     UI.saveMovies(movies);
     UI.displayMovies();
   }
 
-  static updateRating(id, newRating){
-    const movies = UI.getMovies().map(movie => movie.id === id ? {...movie, rating: newRating} : movie);
+  static updateRating(id, newRating) {
+    const movies = UI.getMovies().map((movie) =>
+      movie.id === id ? { ...movie, rating: newRating } : movie
+    );
     UI.saveMovies(movies);
     UI.displayMovies();
   }
-static displayMovies() {
-  const list = document.querySelector("#movie-list");
-  list.innerHTML = "";
-  const movies = UI.getMovies();
-  movies.map(movie => UI.addMovieToList(movie));
-}
+  static displayMovies() {
+    const list = document.querySelector("#movie-list");
+    list.innerHTML = "";
+    const movies = UI.getMovies();
+    movies.map((movie) => UI.addMovieToList(movie));
+  }
   static showAlert(message, className) {
     //lag div, legg til klasse og tekst
     const div = document.createElement("div");
@@ -71,61 +79,69 @@ static displayMovies() {
     // sett inn alert
     container.insertBefore(div, form);
     // Timeout etter 3 sek
-    setTimeout(() =>
-     div.remove(), 3000);
-    };
-    static clearFields() {
+    setTimeout(() => div.remove(), 3000);
+  }
+  static clearFields() {
     //clear ut feltene
     document.getElementById("title").value = "";
     document.getElementById("genre").value = "";
     document.getElementById("year").value = "";
+
+    //nullstill stjernene
+    const stars = document.querySelectorAll("#rating-stars i");
+    stars.forEach((star) => star.classList.remove("active"));
+    rating = 0;
   }
 }
 
-//legg til film 
+//legg til film
 // targeter og legger til event listener for å legge til en film
-document.querySelector("#movie-form").addEventListener("submit", e => {
+document.querySelector("#movie-form").addEventListener("submit", (e) => {
   e.preventDefault();
-    //henter form valuene
+  //henter form valuene
   const title = document.querySelector("#title").value.trim();
   const genre = document.querySelector("#genre").value.trim();
   const year = document.querySelector("#year").value.trim();
-    // instantere UI
+  // instantere UI
   // const ui = new UI();
   // validere
-  if (!title|| !genre|| !year) {
+  if (!title || !genre || !year) {
     // error alert
-     UI.showAlert("Please fill inn all fields", "error");
-     return;
+    UI.showAlert("Vennligst fyll inn alle felt", "error");
+    return;
   }
-    // instanrere movie
-    const movie = new Movie(Date.now().toString(), title, genre, year);
-    const movies = UI.getMovies();
-    movies.push(movie);
-    UI.saveMovies(movies);
-    UI.displayMovies();
-    UI.showAlert("Movie added to list!", "success");
-    UI.clearFields();
+  // instanrere movie
+  const movie = new Movie(Date.now().toString(), title, genre, year, rating || 0);
+  const movies = UI.getMovies();
+  movies.push(movie);
+  UI.saveMovies(movies);
+  UI.displayMovies();
+  UI.showAlert("Film lagt til!", "success");
+  UI.clearFields();
 });
 
-  // Slett film
-  // Event listener for delete
-document.querySelector("#movie-list").addEventListener("click", e => {
-    if (e.target.classList.contains ("delete")) {
-      const id = e.target.closest("tr").dataset.id;
-      UI.deleteMovie(id);
-      UI.showAlert("Movie deleted", "success");
-          e.preventDefault();
-    }
+// Slett film
+// Event listener for delete
+document.querySelector("#movie-list").addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete")) {
+    const id = e.target.closest("tr").dataset.id;
+    UI.deleteMovie(id);
+    UI.showAlert("Film fjernet!", "success");
+    e.preventDefault();
+  }
+// Event listener for edit (uferdig)
+// document.querySelector("#movie-list").addEventListener("click", (e) => {
+//   if (e.target.classList.contains("edit")){
 
+//   }
+// })
   //Klikk på stjernene
-  if (e.target.classList.contains("fa-star")){
-
+  if (e.target.classList.contains("fa-star")) {
     const id = e.target.closest("tr").dataset.id;
     const newRating = parseInt(e.target.dataset.value);
     UI.updateRating(id, newRating);
   }
-  });
+});
 
 //   clearFields() {
 //     //clear ut feltene
@@ -134,7 +150,6 @@ document.querySelector("#movie-list").addEventListener("click", e => {
 //     document.getElementById("year").value = " ";
 //   }
 // }
-
 
 // hent stjernene fra html for å manipulere de
 let rating = 0;
