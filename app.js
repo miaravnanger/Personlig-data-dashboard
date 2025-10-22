@@ -46,6 +46,8 @@ class UI {
     }
     return html;
   }
+
+  //slett filme fra den synlige listen
   static deleteMovie(id) {
     const movies = UI.getMovies().filter((m) => m.id !== id);
     UI.saveMovies(movies);
@@ -59,12 +61,19 @@ class UI {
     UI.saveMovies(movies);
     UI.displayMovies();
   }
+
+  //vis filmene på siden
   static displayMovies() {
     const list = document.querySelector("#movie-list");
-    list.innerHTML = "";
+    const clearBtn = document.querySelector(".clearAll");
     const movies = UI.getMovies();
+    list.innerHTML = "";
     movies.map((movie) => UI.addMovieToList(movie));
+    // Gjør sånn at "tøm listen" knappen ikke vises med mindre det er noe i listen
+    clearBtn.style.display = movies.length ? "inline-block" : "none";
   }
+
+  // Lager en alert som kan brukes igjen
   static showAlert(message, className) {
     //lag div, legg til klasse og tekst
     const div = document.createElement("div");
@@ -90,7 +99,7 @@ class UI {
     rating = 0;
   }
 }
-
+document.addEventListener("DOMContentLoaded", UI.displayMovies);
 //legg til film
 // targeter og legger til event listener for å legge til en film
 document.querySelector("#movie-form").addEventListener("submit", (e) => {

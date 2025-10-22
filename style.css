@@ -107,6 +107,14 @@ label {
   font-size: 12px;
   font-weight: 700;
 }
+.delete:link {
+	text-decoration: none;
+	color: black;
+}
+.delete:hover {
+	text-decoration: underline;
+	color: black;
+}
 .star-box {
   display: flex;
   flex-direction: column;
@@ -217,6 +225,7 @@ label {
   .fa-pencil {
     font-size: 17px;
   }
+
   .delete {
     font-size: 20px;
     font-weight: 700;
