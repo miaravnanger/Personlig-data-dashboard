@@ -34,7 +34,6 @@ class UI {
   <td class="rating">${UI.renderStars(rating)}</td>
   <td><a href="#" <i class="fa-solid fa-pencil"></i><td>
   <td><a href="#" class="delete">X</a></td>
-
   `;
     list.appendChild(row);
   }
@@ -182,4 +181,43 @@ document.querySelector(".clearAll").addEventListener("click", () => {
     UI.displayMovies(); //oppdaterer listeinnholdet til tomt
     UI.showAlert("Listen er tømt!", "success");
   }
+});
+
+// filtrer etter brukerens input
+document.querySelector("#filter").addEventListener("input", (e) => {
+  const query = e.target.value.toLowerCase();
+  const movies = UI.getMovies();
+  const filtered = movies.filter(
+    (m) =>
+      m.title.toLowerCase().includes(query) ||
+      m.genre.toLowerCase().includes(query) ||
+      m.year.includes(query)
+  );
+  UI.renderFilteredMovies(filtered);
+});
+UI.renderFilteredMovies = function (movies) {
+  const list = document.querySelector("#movie-list");
+  list.innerHTML = "";
+  movies.forEach((movie) => UI.addMovieToList(movie));
+};
+
+// sorter
+// Event listener som lytter på når brukeren forandrer/velger ny verdi fra sorteringslisten
+document.querySelector("#sort").addEventListener("change", (e) => {
+  const value = e.target.value;
+  const movies = UI.getMovies();
+
+  if (value === "rating") {
+    movies.sort((a, b) => b.rating - a.rating);
+  } else if (value === "year") {
+    movies.sort((a, b) => b.year - a.year);
+  } else if (value === "title") {
+    movies.sort((a, b) => a.title.localeCompare(b.title));
+  } else if (value === "genre") {
+    movies.sort((a, b) => a.genre.localeCompare(b.genre));
+  } else {
+    movies.sort((a, b) => parseInt(b.id) - parseInt(a.id));
+  }
+  UI.saveMovies(movies);
+  UI.displayMovies();
 });
