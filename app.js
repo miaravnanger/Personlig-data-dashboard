@@ -37,8 +37,6 @@ class UI {
 
   `;
     list.appendChild(row);
-  
-
   }
   static renderStars(rating) {
     let html = "";
@@ -111,7 +109,13 @@ document.querySelector("#movie-form").addEventListener("submit", (e) => {
     return;
   }
   // instanrere movie
-  const movie = new Movie(Date.now().toString(), title, genre, year, rating || 0);
+  const movie = new Movie(
+    Date.now().toString(),
+    title,
+    genre,
+    year,
+    rating || 0
+  );
   const movies = UI.getMovies();
   movies.push(movie);
   UI.saveMovies(movies);
@@ -129,12 +133,14 @@ document.querySelector("#movie-list").addEventListener("click", (e) => {
     UI.showAlert("Film fjernet!", "success");
     e.preventDefault();
   }
-// Event listener for edit (uferdig)
-// document.querySelector("#movie-list").addEventListener("click", (e) => {
-//   if (e.target.classList.contains("edit")){
+  // Event listener for edit (uferdig)
+  // document.querySelector("#movie-list").addEventListener("click", (e) => {
+  //   if (e.target.classList.contains("edit")){
 
-//   }
-// })
+  // clearAll knapp
+
+  //   }
+  // })
   //Klikk på stjernene
   if (e.target.classList.contains("fa-star")) {
     const id = e.target.closest("tr").dataset.id;
@@ -168,4 +174,12 @@ stars.forEach((star, index1) => {
         : star.classList.remove("active");
     });
   });
+});
+
+document.querySelector(".clearAll").addEventListener("click", () => {
+  if (confirm("Er du sikker på at du vil tømme hele listen?")) {
+    localStorage.removeItem("movies"); //fjerner alt fra local storage
+    UI.displayMovies(); //oppdaterer listeinnholdet til tomt
+    UI.showAlert("Listen er tømt!", "success");
+  }
 });
