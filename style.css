@@ -99,21 +99,24 @@ label {
 .error {
   background-color: red;
 }
-/* gjør rediger knappen mindre */
-.fa-pencil {
-  font-size: 10px;
-}
+/* styler delete og edit knappene*/
 .delete {
   font-size: 12px;
-  font-weight: 700;
+  color: black;
 }
 .delete:link {
-	text-decoration: none;
-	color: black;
+  text-decoration: none;
+  color: black;
 }
 .delete:hover {
-	text-decoration: underline;
-	color: black;
+  text-decoration: underline;
+  color: black;
+}
+.edit {
+  color: black;
+}
+.fa-pencil:hover {
+  text-decoration: underline;
 }
 .star-box {
   display: flex;
@@ -149,7 +152,7 @@ label {
 
 .clearAll {
   font-size: 13px;
-	font-weight: 700;
+  font-weight: 700;
 }
 
 /* mobile large 425px */
@@ -240,12 +243,12 @@ label {
     width: 100%;
     font-size: 20px;
   }
-	.button{
-		margin-right: 1,5%;
-	}
+  .button {
+    margin-right: 1, 5%;
+  }
   .clearAll {
     font-size: 17px;
-		font-weight: 500;
+    font-weight: 500;
   }
 }
 

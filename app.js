@@ -32,7 +32,7 @@ class UI {
   <td>${movie.genre}</td>
   <td>${movie.year}</td>
   <td class="rating">${UI.renderStars(rating)}</td>
-  <td><a href="#" <i class="fa-solid fa-pencil"></i><td>
+  <td><a href="#" class="edit"><i class="fa-solid fa-pencil"></i></a><td>
   <td><a href="#" class="delete">X</a></td>
   `;
     list.appendChild(row);
@@ -116,24 +116,35 @@ document.querySelector("#movie-form").addEventListener("submit", (e) => {
     UI.showAlert("Vennligst fyll inn alle felt", "error");
     return;
   }
-  // instanrere movie
-  const movie = new Movie(
-    Date.now().toString(),
-    title,
-    genre,
-    year,
-    rating || 0
-  );
+  //edit knapp
+  
+  const editingId = e.target.dataset.editing;
   const movies = UI.getMovies();
-  movies.push(movie);
-  UI.saveMovies(movies);
-  UI.displayMovies();
-  UI.showAlert("Film lagt til!", "success");
+  if (editingId) {
+    const updatedMovies = movies.map((movie) =>
+      movie.id === editingId ? { ...movie, title, genre, year, rating } : movie
+    );
+    UI.saveMovies(updatedMovies);
+    UI.displayMovies();
+    UI.showAlert("Film oppdatert!", "success");
+    e.target.removeAttribute("data-editing");
+  } else {
+    const movie = new Movie(
+      Date.now().toString(),
+      title,
+      genre,
+      year,
+      rating || 0
+    );
+    movies.push(movie);
+    UI.saveMovies(movies);
+    UI.displayMovies();
+    UI.showAlert("Film lagt til!", "success");
+  }
   UI.clearFields();
 });
 
 // Slett film
-// Event listener for delete
 document.querySelector("#movie-list").addEventListener("click", (e) => {
   if (e.target.classList.contains("delete")) {
     const id = e.target.closest("tr").dataset.id;
@@ -141,19 +152,36 @@ document.querySelector("#movie-list").addEventListener("click", (e) => {
     UI.showAlert("Film fjernet!", "success");
     e.preventDefault();
   }
-  // Event listener for edit (uferdig)
-  // document.querySelector("#movie-list").addEventListener("click", (e) => {
-  //   if (e.target.classList.contains("edit")){
 
-  // clearAll knapp
-
-  //   }
-  // })
   //Klikk på stjernene
   if (e.target.classList.contains("fa-star")) {
     const id = e.target.closest("tr").dataset.id;
     const newRating = parseInt(e.target.dataset.value);
     UI.updateRating(id, newRating);
+  }
+
+  // Rediger film
+  if (e.target.classList.contains("fa-pencil")) {
+    const id = e.target.closest("tr").dataset.id;
+    const movies = UI.getMovies();
+    const movieToEdit = movies.find((m) => m.id === id);
+
+    //fyll in feltene i edit mode
+    document.getElementById("title").value = movieToEdit.title;
+    document.getElementById("genre").value = movieToEdit.genre;
+    document.getElementById("year").value = movieToEdit.year;
+
+    //marker stjernene på nytt
+    const stars = document.querySelectorAll("#rating-stars i");
+    rating = movieToEdit.rating;
+    stars.forEach((star, i) => {
+      i < rating
+        ? star.classList.add("active")
+        : star.classList.remove("active");
+    });
+    //lagre id på filmen som ble redigert
+    document.querySelector("#movie-form").dataset.editing = id;
+    UI.showAlert("Rediger og send inn på nytt", "success");
   }
 });
 
