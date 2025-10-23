@@ -16,21 +16,19 @@
   padding: 0px;
   box-sizing: border-box;
 }
-
 body {
-  width: 100svw;
-  height: 100svh;
+  min-width: 100svw;
+  min-height: 100vh;
   font-size: var(--font-size-small);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   background-color: var(--bg-color);
+  overflow-x: hidden;
 }
-
 h1 {
   color: var(--font-color);
   font-family: var(--font-family-title);
-  padding-top: 40%;
 }
 
 h2 {
@@ -238,15 +236,6 @@ label {
   font-family: Anta;
   src: url(./font/Anta-Regular.ttf);
 }
-/* mobile large 425px */
-/* @media screen and (min-width: 425px) {
-
-}
-
-/* mobile large 768px */
-/* @media screen and (min-width: 768px) { 
-}
-
 
 /* laptpop 1080px */
 @media screen and (min-width: 1080px) {
@@ -280,10 +269,12 @@ label {
   }
   .movie-table tr {
     width: 100%;
-    font-size: var(--font-size-desktop);
+    font-size: 25px;
     justify-content: space-evenly;
   }
-
+  .movie-table th {
+    font-size: 25px;
+  }
   .submit {
     font-size: var(--font-size-desktop);
     width: 50%;
@@ -303,10 +294,13 @@ label {
   /* UI stjernene*/
   .rating i {
     color: #e6e6e6;
-    font-size: 15px;
+    font-size: 17px;
   }
   .rating i.active {
     color: #ff9c1a;
+  }
+  .stars i {
+  font-size: 17px;
   }
   .fa-pencil {
     font-size: 17px;
@@ -335,8 +329,3 @@ label {
     font-weight: 500;
   }
 }
-
-/* desktop 1440px
-@media screen and (min-width: 1440px) {
-
-}  */
