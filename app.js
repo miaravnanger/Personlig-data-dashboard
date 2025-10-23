@@ -24,7 +24,7 @@ class UI {
   static addMovieToList(movie) {
     const list = document.querySelector("#movie-list");
     const { id, title, genre, year, rating } = movie;
-    // Ny rad i HTML-tabellen for film-listen
+    // Ny rad i tabellen for film-listen
     const row = document.createElement("tr");
     // Henter ut data-verdien til elementet og lagrer det som "id" for å bruke seinere når vi skal slette og redigere filmer
     row.dataset.id = id;
