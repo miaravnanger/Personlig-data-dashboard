@@ -305,7 +305,9 @@ label {
   .fa-pencil {
     font-size: 17px;
   }
-
+  .fa-heart {
+    font-size: 17px;
+  }
   .delete {
     font-size: 20px;
     font-weight: 700;
