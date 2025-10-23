@@ -32,6 +32,7 @@ class UI {
   <td>${movie.genre}</td>
   <td>${movie.year}</td>
   <td class="rating">${UI.renderStars(rating)}</td>
+  <td><a href="#" class="favorite"><i class="fa-solid fa-heart ${movie.favorite ? "fav" : ""}"></i></a></td>
   <td><a href="#" class="edit"><i class="fa-solid fa-pencil"></i></a><td>
   <td><a href="#" class="delete">X</a></td>
   `;
@@ -116,6 +117,7 @@ document.querySelector("#movie-form").addEventListener("submit", (e) => {
     UI.showAlert("Vennligst fyll inn alle felt", "error");
     return;
   }
+
   //edit knapp
   
   const editingId = e.target.dataset.editing;
@@ -152,7 +154,14 @@ document.querySelector("#movie-list").addEventListener("click", (e) => {
     UI.showAlert("Film fjernet!", "success");
     e.preventDefault();
   }
-
+  if(e.target.classList.contains("fa-heart")) {
+    const id = e.target.closest("tr").dataset.id;
+    const movies = UI.getMovies();
+    const updatedMovies = movies.map((movie)=>
+    movie.id === id ? { ...movie, favorite: !movie.favorite } : movie);
+    UI.saveMovies(updatedMovies);
+    UI.displayMovies();
+  }
   //Klikk på stjernene
   if (e.target.classList.contains("fa-star")) {
     const id = e.target.closest("tr").dataset.id;
@@ -252,6 +261,8 @@ document.querySelector("#sort").addEventListener("change", (e) => {
     movies.sort((a, b) => a.title.localeCompare(b.title));
   } else if (value === "genre") {
     movies.sort((a, b) => a.genre.localeCompare(b.genre));
+  } else if (value === "favorite") {
+    movies.sort((a, b) => b.favorite - a.favorite);
   } else {
     movies.sort((a, b) => parseInt(b.id) - parseInt(a.id));
   }
