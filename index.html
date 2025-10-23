@@ -14,10 +14,9 @@
   <body>
     <div class="container">
       <h1>Filmliste</h1>
-      <br />
+      <br>
       <form id="movie-form">
         <h2>Ny film</h2>
-        <br />
         <div>
           <label for="title">Tittel</label>
           <input type="text" id="title" class="input-text" />
@@ -32,6 +31,7 @@
           <label for="year">Utgitt</label>
           <input type="number" id="year" class="input-text" />
         </div>
+        <br>
         <div class="star-box">
           <label>Rating</label>
           <div class="stars" id="rating-stars">
@@ -58,14 +58,18 @@
           <label for="sort">Sorter</label>
           <select id="sort">
             <option value="date-added">Sist lagt til</option>
+            <option value="favorite">Favoritter</option>
             <option value="rating">Rating (Høy-Lav)</option>
+            <option value="rating2">Rating (Lav-Høy)</option>
             <option value="year">Utgitt (Nyeste først)</option>
+            <option value="year2">Utgitt (Eldste først)</option>
             <option value="title">Tittel (A/Z)</option>
             <option value="genre">Sjanger (A/Z)</option>
             <option value="favorite">Favoritter</option>
           </select>
         </div>
       </div>
+      <br>
       <div class="list-container">
       <table class="movie-table">
         <thead>

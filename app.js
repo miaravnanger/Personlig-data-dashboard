@@ -32,20 +32,22 @@ class UI {
   <td>${movie.genre}</td>
   <td>${movie.year}</td>
   <td class="rating">${UI.renderStars(rating)}</td>
-  <td><a href="#" class="favorite"><i class="fa-solid fa-heart ${movie.favorite ? "fav" : ""}"></i></a></td>
+  <td><a href="#" class="favorite"><i class="fa-solid fa-heart ${
+    movie.favorite ? "fav" : ""
+  }"></i></a></td>
   <td><a href="#" class="edit"><i class="fa-solid fa-pencil"></i></a><td>
   <td><a href="#" class="delete">X</a></td>
   `;
     list.appendChild(row);
   }
   static renderStars(rating) {
-    let html = "";
-    for (let i = 1; i <= 5; i++) {
-      html += `<i class="fa-solid fa-star ${
-        i <= rating ? "active" : ""
-      }" data-value="${i}"></i>`;
-    }
-    return html;
+    return Array.from(
+      { length: 5 },
+      (_, i) =>
+        `<i class="fa-solid fa-star readOnly-star ${
+          i < rating ? "active" : ""
+        }"></i>`
+    ).join("");
   }
 
   //slett filme fra den synlige listen
@@ -86,7 +88,7 @@ class UI {
     // sett inn alert
     container.insertBefore(div, form);
     // Timeout etter 3 sek
-    setTimeout(() => div.remove(), 3000);
+    setTimeout(() => div.remove(), 1500);
   }
   static clearFields() {
     //clear ut feltene
@@ -119,7 +121,7 @@ document.querySelector("#movie-form").addEventListener("submit", (e) => {
   }
 
   //edit knapp
-  
+
   const editingId = e.target.dataset.editing;
   const movies = UI.getMovies();
   if (editingId) {
@@ -146,7 +148,6 @@ document.querySelector("#movie-form").addEventListener("submit", (e) => {
   UI.clearFields();
 });
 
-// Slett film
 document.querySelector("#movie-list").addEventListener("click", (e) => {
   if (e.target.classList.contains("delete")) {
     const id = e.target.closest("tr").dataset.id;
@@ -154,11 +155,12 @@ document.querySelector("#movie-list").addEventListener("click", (e) => {
     UI.showAlert("Film fjernet!", "success");
     e.preventDefault();
   }
-  if(e.target.classList.contains("fa-heart")) {
+  if (e.target.classList.contains("fa-heart")) {
     const id = e.target.closest("tr").dataset.id;
     const movies = UI.getMovies();
-    const updatedMovies = movies.map((movie)=>
-    movie.id === id ? { ...movie, favorite: !movie.favorite } : movie);
+    const updatedMovies = movies.map((movie) =>
+      movie.id === id ? { ...movie, favorite: !movie.favorite } : movie
+    );
     UI.saveMovies(updatedMovies);
     UI.displayMovies();
   }
@@ -255,8 +257,12 @@ document.querySelector("#sort").addEventListener("change", (e) => {
 
   if (value === "rating") {
     movies.sort((a, b) => b.rating - a.rating);
+  } else if (value === "rating2") {
+    movies.sort((a, b) => a.rating - b.rating);
   } else if (value === "year") {
     movies.sort((a, b) => b.year - a.year);
+  } else if (value === "year2") {
+    movies.sort((a, b) => a.year - b.year);
   } else if (value === "title") {
     movies.sort((a, b) => a.title.localeCompare(b.title));
   } else if (value === "genre") {
